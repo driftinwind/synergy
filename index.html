@@ -7,112 +7,135 @@
   <meta name="description" content="A strategic partnership between the Republic of Kazakhstan, 01.AI, and Freedom Holding Corp.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
   <style>
     :root {
       --bg: #ffffff;
-      --text: #1d1d1f;
-      --accent: #0066cc;
-      --secondary: #6e6e73;
-      --border: #e5e5e7;
-      --card-bg: #f5f5f7;
+      --text-main: #1a1a1a;
+      --text-secondary: #4a4a4a;
+      --accent: #0052cc;
+      --border: #e1e4e8;
+      --subtle-bg: #f8f9fa;
+      --skeptic: #d93025;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Inter', -apple-system, system-ui, sans-serif;
       background-color: var(--bg);
-      color: var(--text);
+      color: var(--text-main);
       line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+    .container.narrow { max-width: 800px; }
 
     /* Header */
     .site-header {
-      position: fixed;
-      top: 0; width: 100%;
-      background: rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(20px);
+      position: fixed; top: 0; width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
       z-index: 1000;
+      padding: 1rem 0;
     }
-    .header-inner {
-      max-width: 1200px; margin: 0 auto;
-      padding: 1rem 2rem;
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    .logo { font-weight: 700; text-decoration: none; color: var(--text); font-size: 1.2rem; }
-    .nav-list { display: flex; list-style: none; gap: 1.5rem; }
-    .nav-list a { text-decoration: none; color: var(--secondary); font-size: 0.9rem; transition: color 0.3s; }
+    .header-inner { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 700; text-decoration: none; color: var(--text-main); font-size: 1.25rem; letter-spacing: -0.5px; }
+    .nav-list { display: flex; list-style: none; gap: 1.2rem; }
+    .nav-list a { text-decoration: none; color: var(--text-secondary); font-size: 0.85rem; font-weight: 500; transition: color 0.2s; }
     .nav-list a:hover { color: var(--accent); }
 
-    /* Hero */
-    .hero {
-      padding: 160px 2rem 100px;
-      text-align: center;
-      background: radial-gradient(circle at 50% 50%, #f0f7ff 0%, #ffffff 100%);
-    }
-    .eyebrow { color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; font-size: 0.8rem; margin-bottom: 1rem; }
-    .hero-title { font-size: clamp(2.5rem, 8vw, 4.5rem); line-height: 1.1; margin-bottom: 1.5rem; font-weight: 700; letter-spacing: -0.02em; }
-    .hero-subtitle { font-size: 1.5rem; color: var(--secondary); max-width: 800px; margin: 0 auto 2rem; }
-    .hero-partners { font-weight: 600; margin-bottom: 3rem; }
-    .btn { padding: 0.8rem 2rem; border-radius: 99px; text-decoration: none; font-weight: 600; transition: all 0.3s; display: inline-block; }
-    .btn-primary { background: var(--text); color: white; }
-    .btn-primary:hover { opacity: 0.9; transform: translateY(-2px); }
-    .btn-ghost { color: var(--accent); margin-left: 1rem; }
-
     /* Sections */
-    .section { padding: 100px 2rem; max-width: 1200px; margin: 0 auto; }
-    .section-alt { background-color: var(--card-bg); max-width: 100%; }
-    .section-header { margin-bottom: 4rem; max-width: 800px; }
-    .section-kicker { color: var(--accent); font-weight: 700; font-size: 1.2rem; display: block; margin-bottom: 0.5rem; }
-    h2 { font-size: 2.5rem; margin-bottom: 1.5rem; letter-spacing: -0.01em; }
-    .lead { font-size: 1.25rem; color: var(--secondary); }
+    .section { padding: 80px 0; border-bottom: 1px solid var(--border); }
+    .section-alt { background-color: var(--subtle-bg); }
+    .section-header { margin-bottom: 3rem; }
+    .section-kicker { display: block; color: var(--accent); font-weight: 700; font-size: 0.9rem; margin-bottom: 0.5rem; text-transform: uppercase; }
+    h2 { font-size: 2.25rem; letter-spacing: -0.02em; margin-bottom: 1rem; }
+    .lead { font-size: 1.2rem; color: var(--text-secondary); max-width: 850px; }
 
-    /* Grid Layouts */
-    .limit-grid, .pillar-grid, .roles-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem; list-style: none;
-    }
-    .limit-card, .pillar, .role-card {
-      background: white; padding: 2.5rem; border-radius: 20px;
-      border: 1px solid var(--border); transition: border 0.3s;
-    }
-    .limit-card h3, .pillar h3 { margin-bottom: 1rem; font-size: 1.4rem; }
-    
-    /* Case Study Style */
+    /* Hero */
+    .hero { padding: 180px 0 100px; text-align: center; border-bottom: 1px solid var(--border); background: radial-gradient(circle at top, #f0f4ff 0%, #ffffff 100%); }
+    .eyebrow { text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); font-weight: 700; font-size: 0.8rem; margin-bottom: 1rem; }
+    .hero-title { font-size: 4rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 1rem; line-height: 1.1; }
+    .hero-subtitle { font-size: 1.5rem; color: var(--text-secondary); margin-bottom: 1.5rem; }
+    .hero-partners { font-weight: 500; color: var(--text-main); margin-bottom: 2.5rem; }
+    .btn { display: inline-block; padding: 0.8rem 2rem; border-radius: 6px; text-decoration: none; font-weight: 600; transition: all 0.2s; }
+    .btn-primary { background: var(--accent); color: white; border: 1px solid var(--accent); }
+    .btn-ghost { background: transparent; color: var(--accent); border: 1px solid var(--accent); margin-left: 1rem; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+
+    /* Quote */
+    .pull-quote { font-size: 1.75rem; font-weight: 300; font-style: italic; color: var(--text-secondary); line-height: 1.4; text-align: center; }
+
+    /* Grid */
+    .limit-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; list-style: none; }
+    .limit-card { background: white; border: 1px solid var(--border); padding: 2rem; border-radius: 8px; }
+    .limit-card-wide { grid-column: span 2; }
+    .limit-card h3 { margin-bottom: 0.75rem; color: var(--accent); }
+
+    .pillar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    .pillar { padding: 1rem; }
+    .pillar-icon { font-size: 1.5rem; color: var(--accent); margin-bottom: 1rem; }
+    .pillar h3 { margin-bottom: 1rem; }
+
+    /* Case Study */
+    .case-block { background: #fffbe6; border: 1px solid #ffe58f; padding: 2rem; border-radius: 8px; margin-bottom: 2rem; }
+    .case-label { font-size: 0.9rem; text-transform: uppercase; font-weight: 700; margin-bottom: 0.5rem; }
     .agent-stream { display: flex; flex-direction: column; gap: 1rem; margin: 2rem 0; }
-    .agent-card { background: white; padding: 1.5rem; border-left: 4px solid var(--accent); border-radius: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-    .agent-role { font-weight: 700; color: var(--accent); text-transform: uppercase; font-size: 0.8rem; display: block; margin-bottom: 0.5rem; }
-    .agent-card-skeptic { border-left-color: #ff3b30; }
+    .agent-card { background: white; border: 1px solid var(--border); padding: 1.25rem; border-left: 4px solid var(--accent); border-radius: 4px; }
+    .agent-role { font-weight: 800; text-transform: uppercase; font-size: 0.75rem; color: var(--accent); display: block; margin-bottom: 0.25rem; }
+    .agent-card-skeptic { border-left-color: var(--skeptic); background: #fffcfc; }
+    .agent-card-skeptic .agent-role { color: var(--skeptic); }
+
+    .synthesis { background: #f0f7ff; border: 1px solid #bcd9ff; padding: 2.5rem; border-radius: 8px; margin-top: 3rem; }
+    .time-compare { display: flex; align-items: center; justify-content: center; gap: 3rem; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #bcd9ff; }
+    .time-num { display: block; font-size: 2.5rem; font-weight: 800; color: var(--accent); line-height: 1; }
+    .time-unit { font-size: 1rem; font-weight: 700; }
+    .time-desc { font-size: 0.8rem; color: var(--text-secondary); display: block; }
 
     /* Table */
-    .table-wrap { overflow-x: auto; margin-top: 3rem; }
-    .compare-table { width: 100%; border-collapse: collapse; text-align: left; }
-    .compare-table th, .compare-table td { padding: 1.5rem; border-bottom: 1px solid var(--border); }
-    .compare-table thead th { font-weight: 700; color: var(--secondary); }
+    .table-wrap { overflow-x: auto; margin: 2rem 0; }
+    .compare-table { width: 100%; border-collapse: collapse; text-align: left; background: white; }
+    .compare-table th, .compare-table td { padding: 1.2rem; border: 1px solid var(--border); vertical-align: top; }
+    .compare-table thead th { background: var(--subtle-bg); font-weight: 700; }
+
+    /* Compound */
+    .compound-list { list-style: none; }
+    .compound-item { margin-bottom: 2rem; }
+    .compound-item h3 { margin-bottom: 0.5rem; border-left: 3px solid var(--accent); padding-left: 1rem; }
 
     /* Phases */
-    .phase-card { background: white; padding: 3rem; border-radius: 24px; border: 1px solid var(--border); margin-bottom: 2rem; }
-    .phase-badge { background: var(--accent); color: white; padding: 0.4rem 1rem; border-radius: 99px; display: inline-block; font-size: 0.8rem; font-weight: 700; margin-bottom: 1rem; }
-    .phase-row { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .phase-card { background: white; border: 1px solid var(--border); padding: 2.5rem; border-radius: 12px; margin-bottom: 1.5rem; position: relative; }
+    .phase-badge { background: var(--accent); color: white; padding: 0.2rem 0.8rem; font-size: 0.8rem; font-weight: 700; border-radius: 4px; display: inline-block; margin-bottom: 1rem; }
+    .phase-feature { border: 2px solid var(--accent); box-shadow: 0 10px 30px rgba(0,82,204,0.1); }
+    .phase-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .center { text-align: center; margin-top: 3rem; }
 
-    /* Footer */
-    .site-footer { padding: 4rem 2rem; border-top: 1px solid var(--border); text-align: center; color: var(--secondary); }
-    
+    /* Appendix */
+    .appendix-list { padding-left: 1.5rem; }
+    .appendix-list li { margin-bottom: 0.75rem; padding-left: 0.5rem; }
+
+    .site-footer { padding: 4rem 0; background: var(--subtle-bg); border-top: 1px solid var(--border); text-align: center; }
+    .footer-brand { font-weight: 700; margin-bottom: 0.5rem; }
+    .footer-meta { font-size: 0.9rem; color: var(--text-secondary); }
+
     @media (max-width: 768px) {
-      .phase-row { grid-template-columns: 1fr; }
       .hero-title { font-size: 2.5rem; }
       .nav-list { display: none; }
+      .limit-grid, .pillar-grid, .phase-row { grid-template-columns: 1fr; }
+      .limit-card-wide { grid-column: span 1; }
+      .time-compare { flex-direction: column; gap: 1.5rem; }
     }
   </style>
 </head>
 <body>
 
   <header class="site-header">
-    <div class="header-inner">
+    <div class="container header-inner">
       <a class="logo" href="#top">Project Synergy</a>
       <nav class="nav">
         <ul class="nav-list">
@@ -121,7 +144,10 @@
           <li><a href="#breakthrough">Breakthrough</a></li>
           <li><a href="#case-study">Case Study</a></li>
           <li><a href="#human-ai">Human + AI</a></li>
+          <li><a href="#measurable">Metrics</a></li>
+          <li><a href="#compound">Compound</a></li>
           <li><a href="#phases">Phases</a></li>
+          <li><a href="#appendices">Appendices</a></li>
         </ul>
       </nav>
     </div>
@@ -129,118 +155,334 @@
 
   <main id="top">
     <section class="hero">
-      <p class="eyebrow">Strategic partnership</p>
-      <h1 class="hero-title">Project Synergy</h1>
-      <p class="hero-subtitle">A Multi-Agent National Thinktank for the Republic of Kazakhstan</p>
-      <p class="hero-partners">Republic of Kazakhstan · 01.AI · Freedom Holding Corp.</p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="#breakthrough">Explore the model</a>
-        <a class="btn btn-ghost" href="#phases">Risk-free Phase 1</a>
+      <div class="container">
+        <p class="eyebrow">Strategic partnership</p>
+        <h1 class="hero-title">Project Synergy</h1>
+        <p class="hero-subtitle">A Multi-Agent National Thinktank for the Republic of Kazakhstan</p>
+        <p class="hero-partners">
+          Republic of Kazakhstan · <span class="nowrap">01.AI</span> · Freedom Holding Corp.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#breakthrough">Explore the model</a>
+          <a class="btn btn-ghost" href="#phases">Risk-free Phase 1</a>
+        </div>
       </div>
     </section>
 
     <section id="vision" class="section">
-      <div style="max-width: 800px; margin: 0 auto; text-align: center;">
-        <blockquote style="font-size: 1.8rem; font-weight: 300; font-style: italic; color: var(--secondary);">
-          "A multi-agent thinktank is a breakthrough because it allows a nation to think with greater breadth, depth, and continuity while keeping human judgment firmly in control."
+      <div class="container narrow">
+        <blockquote class="pull-quote">
+          <p>
+            A multi-agent thinktank is a breakthrough not because it automates analysis, but because it allows a nation to think with greater breadth, greater depth, greater challenge, and greater continuity than any traditional thinktank can achieve — while keeping human judgment firmly in control.
+          </p>
         </blockquote>
       </div>
     </section>
 
     <section id="limitations" class="section">
-      <header class="section-header">
-        <span class="section-kicker">01</span>
-        <h2>Why Traditional Thinktanks Fall Short</h2>
-        <p class="lead">Five structural limitations that modern statecraft can no longer ignore.</p>
-      </header>
-      <ul class="limit-grid">
-        <li class="limit-card"><h3>Slow</h3><p>Analysis takes 6-18 months. By then, the world has moved on.</p></li>
-        <li class="limit-card"><h3>Fragmented</h3><p>Economics, Energy, and Geopolitics are analyzed in silos.</p></li>
-        <li class="limit-card"><h3>Static</h3><p>Reports are frozen in time. They don't update as data changes.</p></li>
-        <li class="limit-card"><h3>One-time</h3><p>High cost makes continuous strategic evaluation impossible.</p></li>
-      </ul>
+      <div class="container">
+        <header class="section-header">
+          <span class="section-kicker">01</span>
+          <h2>Why Today’s Thinktanks Are No Longer Enough</h2>
+          <p class="lead">
+            The world’s most consequential policy decisions are shaped by thinktanks — Brookings, RAND, McKinsey Global Institute, Chatham House. These institutions have served governments for decades, but they share five structural limitations that no amount of funding can overcome.
+          </p>
+        </header>
+
+        <ul class="limit-grid">
+          <li class="limit-card">
+            <h3>Slow</h3>
+            <p>A single policy study takes 6 to 18 months. By the time recommendations arrive, the landscape has already shifted.</p>
+          </li>
+          <li class="limit-card">
+            <h3>Fragmented</h3>
+            <p>Real policy decisions do not respect domain boundaries. No single team can hold economics, energy, society, manufacturing, technology, and geopolitics in mind simultaneously.</p>
+          </li>
+          <li class="limit-card">
+            <h3>Static</h3>
+            <p>Reports are frozen at publication. When new data arrives, the analysis is already stale — with no mechanism to update conclusions dynamically.</p>
+          </li>
+          <li class="limit-card">
+            <h3>One-time deliverables</h3>
+            <p>A government evaluating dozens of interconnected options each quarter cannot commission enough studies at $1–3 million each to keep pace with modern statecraft.</p>
+          </li>
+          <li class="limit-card limit-card-wide">
+            <h3>Cannot verify inputs</h3>
+            <p>Traditional thinktanks take data at face value. If regional statistics have been smoothed or inflated, every conclusion rests on a false foundation — with no independent mechanism to detect it.</p>
+          </li>
+        </ul>
+
+        <p style="margin-top:2rem; font-weight:600;">Kazakhstan deserves better than analysis that is slow, siloed, stale, one-off, and blind to the quality of its own data.</p>
+      </div>
     </section>
 
     <section id="breakthrough" class="section section-alt">
-      <div class="section">
+      <div class="container">
         <header class="section-header">
           <span class="section-kicker">02</span>
-          <h2>The Breakthrough</h2>
-          <p class="lead">Parallel analytical agents deployed across three dimensions.</p>
+          <h2>What the Breakthrough Really Is</h2>
+          <p class="lead">
+            Project Synergy is not a faster report-writing machine. It is a structurally different way to think about national policy — achieving what no traditional institution can, across three dimensions simultaneously.
+          </p>
         </header>
+
         <div class="pillar-grid">
           <article class="pillar">
-            <h3>Breadth</h3>
-            <p>Economics, energy, and tech agents activate simultaneously, not sequentially.</p>
+            <div class="pillar-icon">◇</div>
+            <h3>Breadth: All critical perspectives, at once</h3>
+            <p>
+              Specialized analytical agents across economics, energy, geopolitics, social policy, industry, technology, and digital governance activate in parallel — each with its own data streams and independent assessment. The system does not add perspectives sequentially; it deploys them simultaneously.
+            </p>
           </article>
           <article class="pillar">
-            <h3>Depth</h3>
-            <p>Built-in <strong>Skeptics</strong> and <strong>Advocates</strong> stress-test every conclusion.</p>
+            <div class="pillar-icon">◈</div>
+            <h3>Depth: Conclusions that survived structured challenge</h3>
+            <p>
+              After independent analysis, an <strong>Advocate</strong> builds the strongest case for the emerging recommendation. A <strong>Skeptic</strong> — structurally required to assume the worst — attacks every assumption and models catastrophic scenarios. This is followed by dedicated <strong>Risk Assessment</strong> and <strong>Implementation Friction</strong> analysis against Kazakhstan’s real institutional and logistical reality.
+            </p>
           </article>
           <article class="pillar">
-            <h3>Continuity</h3>
-            <p>Intelligence that stays connected to live data streams 24/7.</p>
+            <div class="pillar-icon">○</div>
+            <h3>Continuity: Intelligence that never goes stale</h3>
+            <p>
+              Every policy brief stays connected to underlying data streams. When material changes occur, the system flags which assumptions have changed and offers updated analysis — and proactively alerts analysts when significant anomalies appear, before anyone has thought to ask.
+            </p>
           </article>
         </div>
       </div>
     </section>
 
     <section id="case-study" class="section">
-      <header class="section-header">
-        <span class="section-kicker">03</span>
-        <h2>Case Study: Rare Earth Strategy</h2>
-        <p class="lead">How the system processes a $5B investment question in 48 hours.</p>
-      </header>
-      <div class="agent-stream">
-        <div class="agent-card"><span class="agent-role">Economist</span><p>Export value could rise 4.2×; positive NPV in 8 years.</p></div>
-        <div class="agent-card"><span class="agent-role">Energy Analyst</span><p>Gap of 0.9 TWh identified; requires gas or renewable pivot.</p></div>
-        <div class="agent-card agent-card-skeptic"><span class="agent-role">Skeptic</span><p>Solid-state battery tech could cut demand 40% by 2032. Exit strategy needed.</p></div>
-        <div class="agent-card"><span class="agent-role">Friction</span><p>2,400 engineer deficit identified in local labor pool.</p></div>
+      <div class="container">
+        <header class="section-header">
+          <span class="section-kicker">03</span>
+          <h2>How It Works: The Rare Earth Question</h2>
+          <p class="lead">
+            Consider a question leadership might face: <em>“Should Kazakhstan invest $5 billion in rare earth mineral processing?”</em>
+          </p>
+        </header>
+
+        <div class="case-block">
+          <h3 class="case-label">Before analysis — data verification</h3>
+          <p>
+            The system cross-references official regional statistics against independent financial data: commercial electricity payments, payroll tax flows, consumer transactions, banking activity. <strong>Example result:</strong> Karaganda’s official industrial employment figures are inflated by ~12%. The audited baseline shows <strong>14,200</strong> active industrial workers, not 16,100. All subsequent analysis uses the corrected figure.
+          </p>
+          <p style="margin-top:1rem; font-style:italic; font-size:0.9rem;">This verification layer is something no traditional thinktank possesses or can replicate.</p>
+        </div>
+
+        <h3 style="margin-bottom:1.5rem;">Seven perspectives deploy simultaneously</h3>
+        <div class="agent-stream">
+          <div class="agent-card"><span class="agent-role">Economist</span><p>Export value could rise 4.2×; positive NPV in 8 years at base-case prices — or 14 years if rare earth prices fall 30%.</p></div>
+          <div class="agent-card"><span class="agent-role">Energy Analyst</span><p>Processing needs ~1.2 TWh/year vs. 0.3 TWh regional surplus — gap filled by gas (vs. Paris goals) or renewables (+$800M, +3 years).</p></div>
+          <div class="agent-card"><span class="agent-role">Geopolitics</span><p>China controls ~70% of global processing; a major Kazakh entry reads as competitive repositioning — while the West may welcome diversification.</p></div>
+          <div class="agent-card"><span class="agent-role">Social Policy</span><p>Workforce migration could accelerate northern depopulation; toxic waste paths need community consent — often 12–18 months beyond engineering timelines.</p></div>
+          <div class="agent-card"><span class="agent-role">Industrial</span><p>Domestic rare earth separation chemistry expertise is lacking; tech transfer is a prerequisite — otherwise execution risk parallels greenfield semi with 2–3× cost overruns.</p></div>
+          <div class="agent-card agent-card-skeptic"><span class="agent-role">Skeptic</span><p>If solid-state batteries cut rare earth demand ~40% by 2032 (per major labs), the market shrinks dramatically. What is the exit strategy?</p></div>
+          <div class="agent-card"><span class="agent-role">Implementation Friction</span><p>Viable economics, severe friction: ~48 months execution vs. 30-month model; winter windows; 2,400 engineer deficit; rail at 60% of need; SWF procurement +11 months.</p></div>
+        </div>
+
+        <div class="synthesis">
+          <h3>Synthesized recommendation</h3>
+          <p style="margin: 1rem 0;">
+            Not a binary “invest $5B” or “don’t.” Proceed with a <strong>phased $2.2B</strong> initial tranche on the three highest-value elements, contingent on a technology-transfer partner and renewable co-investment. Defer <strong>$2.8B</strong> pending market validation. Adjust timelines ×<strong>1.6</strong> and budget ×<strong>1.3</strong> for implementation reality. Pre-consult Beijing before public announcement.
+          </p>
+          <p style="font-weight:600; margin-bottom: 2rem;">
+            A <strong>separate classified brief</strong> preserves the Skeptic’s unfiltered worst-case analysis for the President, Prime Minister, and Security Council only.
+          </p>
+          <div class="time-compare">
+            <div><span class="time-num">48</span><span class="time-unit">hours</span><span class="time-desc">Project Synergy (elapsed)</span></div>
+            <div style="font-weight:700; color:#ccc;">vs</div>
+            <div><span class="time-num">12–18</span><span class="time-unit">months</span><span class="time-desc">Traditional study of comparable scope</span></div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section id="phases" class="section section-alt">
-      <div class="section">
+    <section id="human-ai" class="section section-alt">
+      <div class="container">
         <header class="section-header">
           <span class="section-kicker">04</span>
-          <h2>Zero-Risk Implementation</h2>
+          <h2>Why Human + AI Is Stronger Than AI Alone</h2>
+          <p class="lead">
+            The AI expands the space of analysis. Humans decide what matters. Project Synergy is not autonomous — it is designed to make human judgment radically more powerful.
+          </p>
         </header>
-        <div class="phase-card">
-          <div class="phase-badge">Phase 1</div>
-          <h3>The 100-Day Retrospective Test</h3>
-          <p><strong>Freedom Holding Corp. underwrites Phase 1 entirely.</strong> If the system fails to outperform historical analysis in a retrospective audit, the Republic makes no financial commitment.</p>
+
+        <div class="pillar-grid">
+          <article class="limit-card">
+            <h3>Framer</h3>
+            <p>AI does not know which questions matter most to Kazakhstan right now. Defining the research agenda — urgency, strategy, politics — requires human judgment, institutional context, and timing no model possesses.</p>
+          </article>
+          <article class="limit-card">
+            <h3>Editor</h3>
+            <p>Every AI-generated brief passes human review before leadership. Analysts test conclusions against political reality, institutions, public sentiment, history, and coalition dynamics — and may amend, challenge, or reject any output.</p>
+          </article>
+          <article class="limit-card">
+            <h3>Owner</h3>
+            <p>National decisions demand human accountability. Responsibility for acting — or not — belongs to people, never to models. Project Synergy informs leadership; it does not replace authority.</p>
+          </article>
         </div>
-        <div class="phase-row">
-          <div class="phase-card">
-            <div class="phase-badge">Phase 2</div>
-            <h3>Full Deployment</h3>
-            <p>Scaling to 25+ agents and integrated government data streams.</p>
-          </div>
-          <div class="phase-card">
-            <div class="phase-badge">Phase 3</div>
-            <h3>Sovereign Handover</h3>
-            <p>Full operational control and IP transfer to Kazakhstan.</p>
+
+        <div style="background:var(--text-main); color:white; padding: 2rem; border-radius: 8px; margin-top: 3rem;">
+          <p><strong>Inviolable constraint:</strong> every policy brief is reviewed, annotated, and approved by at least two qualified human analysts before delivery. The system empowers human judgment — it does not substitute for it.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="measurable" class="section">
+      <div class="container">
+        <header class="section-header">
+          <span class="section-kicker">05</span>
+          <h2>Measurable Differences from a Traditional Thinktank</h2>
+          <p class="lead">Structurally stronger on five dimensions — observable and measurable.</p>
+        </header>
+
+        <div class="table-wrap">
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th scope="col">Dimension</th>
+                <th scope="col">Traditional Thinktank</th>
+                <th scope="col">Project Synergy</th>
+                <th scope="col">Why hiring more people cannot close the gap</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Response cycle</th>
+                <td>6–18 months per major study</td>
+                <td>48 hours to reviewed brief; continuous updates</td>
+                <td>Architecture — parallel multi-agent analysis vs. sequential human work.</td>
+              </tr>
+              <tr>
+                <th scope="row">Analytical breadth</th>
+                <td>1–3 domains; synthesis depends on coordination</td>
+                <td>7+ domains simultaneously; cross-domain tensions surfaced structurally</td>
+                <td>Human attention bandwidth has a physical ceiling.</td>
+              </tr>
+              <tr>
+                <th scope="row">Challenge intensity</th>
+                <td>Culture-dependent; devil’s advocate often absent or performative</td>
+                <td>Adversarial debate, risk gate, implementation friction — built in</td>
+                <td>Institutional design vs. individual courage.</td>
+              </tr>
+              <tr>
+                <th scope="row">Reasoning traceability</th>
+                <td>Judgment scattered across meetings, email, memory</td>
+                <td>Full transcripts, confidence levels, dissent, traceable chains</td>
+                <td>System recording vs. human recall.</td>
+              </tr>
+              <tr>
+                <th scope="row">Knowledge continuity</th>
+                <td>Knowledge leaves with people</td>
+                <td>24/7 operation; permanent retention of analyses and debates</td>
+                <td>Personnel dependence vs. institutional accumulation.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="compound" class="section section-alt">
+      <div class="container">
+        <header class="section-header">
+          <span class="section-kicker">06</span>
+          <h2>Why the Advantage Compounds Over Time</h2>
+          <p class="lead">The most important property is not day-one output — it is that the system becomes more valuable with every question it answers.</p>
+        </header>
+
+        <ul class="compound-list">
+          <li class="compound-item">
+            <h3>National analytical memory</h3>
+            <p>Every analysis — assumptions, debates, revisions, errors, outcomes — is retained. Over years, this builds institutional understanding no external consultancy or new team could replicate.</p>
+          </li>
+          <li class="compound-item">
+            <h3>From project-based to always-on</h3>
+            <p>Replace episodic studies with a standing capability: instant activation for urgent questions, scalable without proportional hiring, proactive surfacing of emerging issues.</p>
+          </li>
+          <li class="compound-item">
+            <h3>A new generation of analysts</h3>
+            <p>30–40 trained professionals master human–AI collaborative intelligence — becoming the analytical backbone of governance. Partner universities gain capabilities few institutions worldwide offer.</p>
+          </li>
+          <li class="compound-item">
+            <h3>Sovereign capability, not vendor dependence</h3>
+            <p>Phase 1: 01.AI deploys and operates. Phase 2: Kazakh engineers take increasing responsibility. Phase 3: full operational control — models, training, architecture, IP remain sovereign. 01.AI transitions to advisory. The outcome is owned national capability, not a foreign subscription.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="phases" class="section">
+      <div class="container">
+        <header class="section-header">
+          <span class="section-kicker">07</span>
+          <h2>Why This Requires No Leap of Faith</h2>
+          <p class="lead">Financial risk to the State is structured out at every stage.</p>
+        </header>
+
+        <div class="phases">
+          <article class="phase-card phase-feature">
+            <div class="phase-badge">Phase 1</div>
+            <h3>The 100-Day Retrospective Test</h3>
+            <p style="font-weight:700; color:var(--accent); margin-bottom: 1rem;">Zero State financial risk</p>
+            <p>
+              Load documented historical crises (e.g. January 2022, 2020 oil shock, post-COVID supply chains). Run the full pipeline as if advising in real time. Compare outputs to actual ministerial responses.
+            </p>
+            <p style="margin: 1rem 0;">
+              An independent audit commission (President’s office, Mazhilis, Nazarbayev University) evaluates whether the system would have produced demonstrably superior analysis. <strong>Freedom Holding Corp. underwrites Phase 1 entirely.</strong> If the system fails the audit, Freedom Holding absorbs the cost. The Republic makes no financial commitment.
+            </p>
+            <p style="font-weight:600;">Phase 2 is authorized only if the commission certifies in writing that quality exceeded the historical response.</p>
+          </article>
+
+          <div class="phase-row">
+            <article class="phase-card">
+              <div class="phase-badge">Phase 2</div>
+              <h3>Full operational deployment</h3>
+              <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom: 1rem;">Months 7–18</p>
+              <p>Expand domain agents; integrate government and private data; establish production cadence; launch the university research platform; grow the analyst team to 20–25.</p>
+            </article>
+            <article class="phase-card">
+              <div class="phase-badge">Phase 3</div>
+              <h3>Sovereign handover</h3>
+              <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom: 1rem;">Months 19–36</p>
+              <p>Transfer operational control, model weights, training pipelines, and documentation. 01.AI operational access ends contractually. Kazakhstan operates and extends the system independently.</p>
+            </article>
           </div>
         </div>
+
+        <p class="center" style="font-size: 1.25rem; font-weight: 600;">Kazakhstan does not need to believe this will work. Kazakhstan only needs to agree to let the system prove it.</p>
+      </div>
+    </section>
+
+    <section id="appendices" class="section section-alt">
+      <div class="container">
+        <header class="section-header">
+          <span class="section-kicker">A–H</span>
+          <h2>Appendices</h2>
+          <p class="lead">For technical and operational review.</p>
+        </header>
+
+        <ol class="appendix-list">
+          <li><strong>A.</strong> Multi-Agent Technical Architecture — three-tier agent design, dual-layer cognitive/swarm philosophy, SFT methodology</li>
+          <li><strong>B.</strong> RAISE Sovereign Shield and Diplomatic Airlock — anti-espionage input defense, protocol formatting, classification enforcement</li>
+          <li><strong>C.</strong> Data Sources and Integration — government assets, Freedom Holding telemetry, secure API design</li>
+          <li><strong>D.</strong> Freedom Holding Corp. — profile, data contribution, Freedom Cloud, philanthropic alignment</li>
+          <li><strong>E.</strong> Governance, Ethics, and Data Sovereignty — human-in-the-loop, residency, bias monitoring, Advisory Board, Analytical Quality Dashboard</li>
+          <li><strong>F.</strong> Investment Framework — phase-by-phase categories, “Always On” cost comparison</li>
+          <li><strong>G.</strong> Research Platform — Scenario Simulation, Research Copilot, Policy Retrospective, Publication Accelerator</li>
+          <li><strong>H.</strong> 01.AI Partner Profile — credentials, AlemLLM, deployment methodology, knowledge transfer</li>
+        </ol>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p>Project Synergy © 2024</p>
-    <p style="font-size: 0.8rem; margin-top: 1rem;">Republic of Kazakhstan · 01.AI · Freedom Holding Corp.</p>
+    <div class="container">
+      <p class="footer-brand">Project Synergy</p>
+      <p class="footer-meta">Republic of Kazakhstan · 01.AI · Freedom Holding Corp.</p>
+    </div>
   </footer>
 
-  <script>
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth'
-        });
-      });
-    });
-  </script>
 </body>
 </html>
