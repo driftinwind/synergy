@@ -3,408 +3,486 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Project Synergy — Multi-Agent National Thinktank</title>
+  <title>Project Synergy — An AI-Enhanced, Youth-Driven National Thinktank</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #ffffff;
-      --text-main: #1a1a1a;
-      --text-muted: #4b5563;
-      --accent: #0052cc;
-      --accent-soft: #eef4ff;
-      --border: #e5e7eb;
-      --skeptic-red: #dc2626;
-      --skeptic-bg: #fef2f2;
-      --success-green: #059669;
+      --text-main: #000000;
+      --text-soft: #444444;
+      --accent: #005bc4; /* Kazakhstan Blue */
+      --accent-light: #f0f7ff;
+      --border: #e2e8f0;
+      --skeptic: #e11d48;
+      --youth-teal: #0d9488;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       font-family: 'Inter', -apple-system, sans-serif;
-      background-color: var(--bg);
+      background: var(--bg);
       color: var(--text-main);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
+      line-height: 1.7;
     }
 
-    .container { max-width: 1000px; margin: 0 auto; padding: 0 2rem; }
-
-    /* Navigation */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+    
+    /* Header */
     header {
-      position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.9);
+      position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.95);
       backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); z-index: 1000;
+      padding: 1rem 0;
     }
-    nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; max-width: 1200px; margin: 0 auto; }
-    .logo { font-weight: 800; font-size: 1.2rem; text-decoration: none; color: var(--text-main); letter-spacing: -1px; }
-    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
-    .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.85rem; font-weight: 500; transition: color 0.2s; }
+    .header-nav { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; text-decoration: none; color: var(--text-main); font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; }
+    .nav-links { display: flex; gap: 1rem; list-style: none; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
+    .nav-links a { text-decoration: none; color: var(--text-soft); }
     .nav-links a:hover { color: var(--accent); }
 
     /* Hero */
-    .hero { padding: 160px 0 80px; text-align: center; border-bottom: 1px solid var(--border); }
-    .hero h1 { font-size: 4rem; font-weight: 800; letter-spacing: -0.04em; line-height: 1; margin-bottom: 1rem; }
-    .hero h2 { font-size: 1.5rem; font-weight: 400; color: var(--text-muted); margin-bottom: 2rem; }
-    .partnership { font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); }
+    .hero { padding: 180px 0 80px; border-bottom: 1px solid var(--border); }
+    .hero-label { color: var(--accent); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; }
+    .hero h1 { font-size: 4.5rem; font-weight: 800; line-height: 1; letter-spacing: -0.04em; margin-bottom: 1.5rem; }
+    .hero h2 { font-size: 1.75rem; font-weight: 400; color: var(--text-soft); margin-bottom: 2.5rem; max-width: 800px; }
+    .hero-founders { border-left: 4px solid var(--accent); padding-left: 1.5rem; font-size: 1.1rem; }
+    .hero-founders strong { display: block; margin-top: 0.5rem; color: var(--accent); }
 
     /* Quote */
-    .quote-section { padding: 80px 0; text-align: center; background: var(--accent-soft); }
-    blockquote { font-size: 1.75rem; font-weight: 300; font-style: italic; color: var(--text-main); max-width: 800px; margin: 0 auto; line-height: 1.4; }
+    .quote-block { background: var(--text-main); color: white; padding: 100px 0; text-align: center; }
+    blockquote { font-size: 2rem; font-weight: 300; font-style: italic; max-width: 900px; margin: 0 auto; }
 
-    /* Sections */
-    section { padding: 80px 0; border-bottom: 1px solid var(--border); }
-    h2.section-title { font-size: 2.25rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 2rem; }
-    .lead { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 3rem; max-width: 800px; }
+    /* Content Sections */
+    section { padding: 100px 0; border-bottom: 1px solid var(--border); }
+    .section-num { font-family: serif; font-style: italic; font-size: 3rem; color: #eee; display: block; margin-bottom: -1rem; }
+    h2 { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 2rem; line-height: 1.2; }
+    p { margin-bottom: 1.5rem; }
 
-    /* Section 1 Grid */
-    .limit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
-    .limit-item { padding: 1.5rem; border: 1px solid var(--border); border-radius: 8px; }
-    .limit-item strong { display: block; font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--accent); }
+    /* Cards & Grids */
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem; }
+    .card { padding: 2rem; border: 1px solid var(--border); border-radius: 4px; }
+    .card h3 { margin-bottom: 1rem; color: var(--accent); }
 
-    /* Section 2 Pillars */
-    .pillar { margin-bottom: 3rem; }
-    .pillar h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--accent); }
+    /* CASE STUDY */
+    .case-box { background: #f9fafb; padding: 3rem; border-radius: 8px; margin: 3rem 0; }
+    .verification-tag { background: #fffbe6; padding: 1.5rem; border: 1px solid #ffe58f; margin-bottom: 2rem; }
+    .agent-stream { display: flex; flex-direction: column; gap: 1rem; }
+    .agent-pill { background: white; padding: 1.5rem; border-radius: 4px; border-left: 4px solid var(--accent); box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    .agent-pill.skeptic { border-left-color: var(--skeptic); background: #fffcfc; }
+    .agent-role { font-weight: 800; font-size: 0.7rem; text-transform: uppercase; color: var(--accent); display: block; }
+    .skeptic .agent-role { color: var(--skeptic); }
 
-    /* Section 3 Case Study */
-    .case-verification { background: #fffbe6; padding: 2rem; border-radius: 8px; border: 1px solid #ffe58f; margin-bottom: 2rem; }
-    .agent-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin: 2rem 0; }
-    .agent-card { padding: 1.25rem; border: 1px solid var(--border); border-radius: 6px; border-left: 4px solid var(--accent); }
-    .agent-card em { display: block; font-style: normal; font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
-    .agent-card.skeptic { border-left-color: var(--skeptic-red); background: var(--skeptic-bg); }
-    .agent-card.skeptic em { color: var(--skeptic-red); }
+    /* HUMAN + AI / YOUTH */
+    .youth-section { background: var(--accent-light); padding: 80px 0; }
+    .highlight-box { border: 2px solid var(--accent); padding: 2.5rem; margin: 2rem 0; border-radius: 8px; background: white; }
+    .leadership-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 3rem; }
 
-    .recommendation-box { background: #f0fdf4; border: 1px solid #bbf7d0; padding: 2.5rem; border-radius: 12px; margin-top: 2rem; }
-    .time-bar { display: flex; align-items: center; justify-content: space-between; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #bbf7d0; }
-    .time-stat { text-align: center; }
-    .time-stat big { display: block; font-size: 2.5rem; font-weight: 800; color: var(--accent); }
+    /* TABLE */
+    .table-container { overflow-x: auto; margin: 3rem 0; }
+    table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.85rem; }
+    th, td { padding: 1.2rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+    th { background: #f8fafc; font-weight: 700; text-transform: uppercase; color: var(--text-soft); }
 
-    /* Section 4 */
-    .roles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 2rem; }
-    .constraint-msg { background: var(--text-main); color: white; padding: 2rem; border-radius: 8px; margin-top: 3rem; }
+    /* APPLICATION: NEXUS */
+    .nexus-box { background: #000; color: white; padding: 4rem; border-radius: 12px; margin: 4rem 0; }
+    .nexus-box h2 { color: white; }
+    .nexus-box .accent-text { color: var(--accent); font-weight: 700; }
 
-    /* Section 5 Table */
-    .table-container { overflow-x: auto; margin-top: 2rem; }
-    table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem; }
-    th, td { padding: 1rem; border: 1px solid var(--border); vertical-align: top; }
-    th { background: #f9fafb; font-weight: 700; }
+    /* PHASES */
+    .phase-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; }
+    .phase-card { background: white; border: 1px solid var(--border); padding: 2rem; }
+    .phase-card.active { border: 2px solid var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+    .phase-label { font-weight: 800; color: var(--accent); text-transform: uppercase; font-size: 0.8rem; margin-bottom: 1rem; display: block; }
 
-    /* Section 7 Phases */
-    .phase-card { border: 1px solid var(--border); padding: 2rem; border-radius: 12px; margin-bottom: 2rem; }
-    .phase-1 { border: 2px solid var(--accent); box-shadow: 0 10px 25px rgba(0,82,204,0.1); }
-    .phase-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
-    .badge { background: var(--accent); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-weight: 700; font-size: 0.8rem; }
-
-    /* Footer & Appendix */
-    .appendix-section { background: #f9fafb; padding: 60px 0; font-size: 0.9rem; }
+    /* APPENDIX */
+    .appendix { background: #f1f5f9; padding: 60px 0; font-size: 0.9rem; }
     .appendix-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    footer { padding: 40px 0; text-align: center; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.9rem; }
+
+    footer { padding: 60px 0; text-align: center; font-size: 0.8rem; color: var(--text-soft); border-top: 1px solid var(--border); }
 
     @media (max-width: 768px) {
       .hero h1 { font-size: 2.5rem; }
-      .roles-grid, .appendix-list { grid-template-columns: 1fr; }
+      .leadership-grid, .phase-grid, .appendix-list { grid-template-columns: 1fr; }
       .nav-links { display: none; }
     }
   </style>
 </head>
 <body>
 
-<header>
-  <nav>
-    <a href="#" class="logo">Project Synergy</a>
-    <ul class="nav-links">
-      <li><a href="#section1">Why</a></li>
-      <li><a href="#section2">Breakthrough</a></li>
-      <li><a href="#section3">Case Study</a></li>
-      <li><a href="#section4">Human+AI</a></li>
-      <li><a href="#section5">Metrics</a></li>
-      <li><a href="#section7">Phases</a></li>
-    </ul>
-  </nav>
-</header>
-
-<main>
-  <!-- HERO -->
-  <section class="hero">
-    <div class="container">
-      <p class="partnership">A Strategic Partnership Between the Republic of Kazakhstan, 01.AI, and Freedom Holding Corp.</p>
-      <h1>Project Synergy</h1>
-      <h2>A Multi-Agent National Thinktank for the Republic of Kazakhstan</h2>
-    </div>
-  </section>
-
-  <!-- QUOTE -->
-  <section class="quote-section">
-    <div class="container">
-      <blockquote>
-        A multi-agent thinktank is a breakthrough not because it automates analysis, but because it allows a nation to think with greater breadth, greater depth, greater challenge, and greater continuity than any traditional thinktank can achieve — while keeping human judgment firmly in control.
-      </blockquote>
-    </div>
-  </section>
-
-  <!-- SECTION 1 -->
-  <section id="section1">
-    <div class="container">
-      <h2 class="section-title">1. Why Today's Thinktanks Are No Longer Enough</h2>
-      <p class="lead">The world's most consequential policy decisions are shaped by thinktanks — Brookings, RAND, McKinsey Global Institute, Chatham House. These institutions have served governments for decades, but they share five structural limitations that no amount of funding can overcome:</p>
-      
-      <div class="limit-grid">
-        <div class="limit-item">
-          <strong>They are slow.</strong>
-          <p>A single policy study takes 6 to 18 months. By the time recommendations arrive, the landscape has already shifted.</p>
-        </div>
-        <div class="limit-item">
-          <strong>They are fragmented.</strong>
-          <p>An economist analyzes fiscal policy. An energy specialist analyzes decarbonization. A geopolitical strategist analyzes alliances. But real policy decisions do not respect domain boundaries. No single team can hold economics, energy, society, manufacturing, technology, and geopolitics in mind simultaneously, modeling cascading effects across all of them at once.</p>
-        </div>
-        <div class="limit-item">
-          <strong>They are static.</strong>
-          <p>Reports are frozen at the moment of publication. When new data arrives — a commodity price shock, a diplomatic development, a technological breakthrough — the analysis is already stale. There is no mechanism to update conclusions dynamically.</p>
-        </div>
-        <div class="limit-item">
-          <strong>They are one-time deliverables.</strong>
-          <p>A government that needs to evaluate dozens of interconnected policy options every quarter simply cannot commission enough studies at $1–3 million each to keep pace with the complexity of modern statecraft.</p>
-        </div>
-        <div class="limit-item" style="grid-column: 1 / -1;">
-          <strong>They cannot verify their own inputs.</strong>
-          <p>Traditional thinktanks take the data they receive at face value. If regional statistics have been smoothed or inflated before reaching the analysts, every subsequent conclusion is built on a false foundation. No amount of sophisticated reasoning can compensate for corrupted inputs. Traditional thinktanks have no independent mechanism to detect this.</p>
-        </div>
-      </div>
-      <p style="margin-top: 2rem; font-weight: 700;">Kazakhstan deserves better than analysis that is slow, siloed, stale, one-off, and blind to the quality of its own data.</p>
-    </div>
-  </section>
-
-  <!-- SECTION 2 -->
-  <section id="section2">
-    <div class="container">
-      <h2 class="section-title">2. What the Breakthrough Really Is</h2>
-      <p class="lead">Project Synergy is not a faster report-writing machine. It is a structurally different way to think about national policy — one that achieves what no traditional institution can, across three dimensions simultaneously.</p>
-      
-      <div class="pillar">
-        <h3>Breadth: All critical perspectives, at once</h3>
-        <p>Traditional thinktanks assemble experts one by one. Cross-domain analysis depends on coordination meetings, shared documents, and the willingness of specialists to engage outside their lanes. In practice, complex questions get fragmented across separate workstreams that rarely reconnect.</p>
-        <p style="margin-top:1rem;">A multi-agent thinktank brings all critical lenses to the table by design. When a policy question enters the system, specialized analytical agents across economics, energy, geopolitics, social policy, industry, technology, and digital governance activate in parallel — each analyzing the question from its domain, drawing on its own data streams, and producing an independent assessment. The system does not add perspectives sequentially. It deploys them simultaneously.</p>
-      </div>
-
-      <div class="pillar">
-        <h3>Depth: Conclusions that have survived structured challenge</h3>
-        <p>Having multiple perspectives is necessary but not sufficient. The real question is whether those perspectives genuinely confront each other. In traditional settings, whether experts truly challenge each other depends on organizational culture, meeting dynamics, and individual courage. The most important objection is often the one no one is willing to raise in front of leadership.</p>
-        <p style="margin-top:1rem;">In Project Synergy, adversarial challenge is not optional — it is architectural. After independent analysis, an Advocate builds the strongest possible case for the emerging recommendation. A Skeptic — structurally required to assume the worst — attacks every assumption, models catastrophic scenarios, and identifies the failure modes no one wants to discuss. This is followed by a dedicated Risk Assessment and an Implementation Friction analysis that tests whether the recommendation survives contact with Kazakhstan's actual institutional, logistical, and bureaucratic reality.</p>
-        <p style="margin-top:1rem; font-weight:600;">A better answer is not an answer produced faster. It is an answer that has survived structured challenge.</p>
-      </div>
-
-      <div class="pillar">
-        <h3>Continuity: Intelligence that never goes stale</h3>
-        <p>Traditional thinktanks deliver reports. Once published, the analysis is frozen. Three months later, half the assumptions may no longer hold — but the document cannot tell anyone that.</p>
-        <p style="margin-top:1rem;">Project Synergy delivers living intelligence. Every policy brief remains connected to its underlying data streams. When material changes occur — a commodity price shift, a diplomatic development, new demographic data — the system automatically flags which assumptions have changed and offers an updated analysis. Beyond reactive updates, the system continuously monitors data streams and proactively alerts analysts when significant anomalies appear — before anyone has thought to ask.</p>
-        <p style="margin-top:1rem; font-weight:600;">A traditional thinktank delivers reports. A multi-agent thinktank delivers a continuously operating national analytical capability.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- SECTION 3 -->
-  <section id="section3">
-    <div class="container">
-      <h2 class="section-title">3. How It Works in Practice: The Rare Earth Question</h2>
-      <p class="lead">To make this concrete, consider a question Kazakhstan's leadership might face: <em>"Should Kazakhstan invest $5 billion in rare earth mineral processing?"</em></p>
-
-      <div class="case-verification">
-        <strong>Before any analysis begins — data verification.</strong>
-        <p>The system cross-references official regional statistics against independent financial data: commercial electricity payments, payroll tax flows, consumer transaction volumes, banking activity. Result: the Karaganda region's official industrial employment figures are inflated by approximately 12%. The audited baseline shows 14,200 active industrial workers, not the reported 16,100. All subsequent analysis uses the corrected figure.</p>
-        <p style="margin-top:1rem; font-size: 0.9rem; font-weight:600;">This capability alone — a built-in verification layer for government data — is something no traditional thinktank possesses or can replicate.</p>
-      </div>
-
-      <h3>Seven perspectives deploy simultaneously:</h3>
-      <div class="agent-grid">
-        <div class="agent-card"><em>Economist</em><p>Conclusions the investment could increase export value by 4.2x, with positive NPV within 8 years under base-case commodity prices — but extending to 14 years if rare earth prices decline 30%.</p></div>
-        <div class="agent-card"><em>Energy Analyst</em><p>Identifies that processing facilities require 1.2 TWh of annual electricity against a current regional surplus of only 0.3 TWh — meaning the gap must be filled by either gas-fired generation (contradicting Paris Agreement commitments) or renewable buildout adding $800M and 3 years.</p></div>
-        <div class="agent-card"><em>Geopolitics Specialist</em><p>Warns that China controls 70% of global rare earth processing and will perceive a major Kazakh entry as competitive repositioning — but Western nations would likely welcome diversification and may offer preferential trade terms.</p></div>
-        <div class="agent-card"><em>Social Policy Analyst</em><p>Flags that workforce migration to processing regions would accelerate depopulation in northern Kazakhstan, and that toxic waste management requires community consent processes that typically take 12–18 months longer than engineering timelines assume.</p></div>
-        <div class="agent-card"><em>Industrial Specialist</em><p>Identifies that Kazakhstan lacks domestic rare earth separation chemistry expertise — a technology transfer partnership is a prerequisite, without which execution risk parallels greenfield semiconductor fabrication with 2–3x historical cost overruns.</p></div>
-        <div class="agent-card skeptic"><em>Skeptic</em><p>Stress-tests the entire thesis: if solid-state battery technology reduces rare earth demand by 40% by 2032 — as three major research labs project — the addressable market shrinks dramatically. What is the exit strategy?</p></div>
-        <div class="agent-card"><em>Implementation Friction</em><p>Actual execution will require 48 months, not the model's 30-month estimate, due to winter construction windows (7 active months/year in Karaganda), a deficit of 2,400 specialized engineers requiring a 24-month training pipeline, rail capacity constraints at 60% of required throughput, and sovereign wealth fund procurement adding 11 months to contracting.</p></div>
-      </div>
-
-      <div class="recommendation-box">
-        <h3 style="margin-bottom:1rem;">The synthesized recommendation</h3>
-        <p>Is not "invest $5 billion" or "don't invest." It is: proceed with a phased $2.2B initial investment focused on the three highest-value elements, contingent on securing a technology transfer partner and renewable energy co-investment. Defer the remaining $2.8B pending market validation. Adjust all timelines by 1.6x and budget by 1.3x to reflect implementation reality. Pre-consult Beijing before public announcement.</p>
-        <p style="margin-top:1.5rem; font-weight:700;">A separate classified brief preserves the Skeptic's unfiltered worst-case analysis — including combined-catastrophe scenarios and their estimated probability — for the President, Prime Minister, and Security Council only.</p>
-        
-        <div class="time-bar">
-          <div class="time-stat"><big>48 Hours</big><span>Project Synergy elapsed time</span></div>
-          <div style="font-weight:800; color:var(--text-muted);">VS</div>
-          <div class="time-stat"><big>12–18 Months</big><span>Traditional study of comparable scope</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SECTION 4 -->
-  <section id="section4">
-    <div class="container">
-      <h2 class="section-title">4. Why Human + AI Is Stronger Than AI Alone</h2>
-      <p class="lead">Project Synergy is not an autonomous system. It is a system designed to make human judgment radically more powerful. The AI expands the space of analysis. Humans decide what matters.</p>
-      <p>Human analysts serve three roles that are not merely important but irreplaceable — and that no AI system, however sophisticated, can assume:</p>
-      
-      <div class="roles-grid">
-        <div class="role-item">
-          <h3 style="color:var(--accent);">Framer</h3>
-          <p>AI agents are powerful analytical engines, but they do not know which questions matter most to Kazakhstan at this moment. Defining the research agenda — which problems are urgent, which are strategic, which are political — requires human judgment informed by institutional context, leadership priorities, and a sense of timing that no model possesses. Humans set the questions. AI explores the answers.</p>
-        </div>
-        <div class="role-item">
-          <h3 style="color:var(--accent);">Editor</h3>
-          <p>Every AI-generated policy brief passes through human review before it reaches leadership. Analysts evaluate whether conclusions survive contact with political reality, institutional dynamics, public sentiment, historical context, and coalition relationships within government. They can amend, challenge, or reject any AI-generated conclusion. The system produces options and trade-offs. Humans judge which options are actionable in the real world.</p>
-        </div>
-        <div class="role-item">
-          <h3 style="color:var(--accent);">Owner</h3>
-          <p>National-level decisions carry consequences that demand human accountability. The responsibility for acting on a recommendation — or choosing not to — belongs to people, never to models. This is not a limitation of the technology. It is the nature of governance. Project Synergy ensures that human leadership is always better informed. It never presumes to replace human authority.</p>
-        </div>
-      </div>
-
-      <p style="margin-top:2rem;">AI explores the space of possibilities. Humans decide what matters, what is feasible, and what they are willing to be accountable for.</p>
-      
-      <div class="constraint-msg">
-        <strong>This is why the system is designed with an inviolable constraint:</strong> every policy brief must be reviewed, annotated, and approved by at least two qualified human analysts before delivery. The system empowers human judgment. It does not substitute for it.
-      </div>
-    </div>
-  </section>
-
-  <!-- SECTION 5 -->
-  <section id="section5">
-    <div class="container">
-      <h2 class="section-title">5. Measurable Differences from a Traditional Thinktank</h2>
-      <p class="lead">Project Synergy is not incrementally better. It is structurally stronger on five dimensions that can be observed and measured:</p>
-      
-      <div class="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th>Dimension</th>
-              <th>Traditional Thinktank</th>
-              <th>Project Synergy</th>
-              <th>Why the gap cannot be closed by hiring more people</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Response cycle</strong></td>
-              <td>6–18 months per major study</td>
-              <td>48 hours to reviewed policy brief; continuous updates thereafter</td>
-              <td>Architecture difference, not staffing difference. Parallel multi-agent analysis cannot be replicated by sequential human work.</td>
-            </tr>
-            <tr>
-              <td><strong>Analytical breadth</strong></td>
-              <td>1–3 domains per study; cross-domain synthesis depends on coordination quality</td>
-              <td>7+ domains activated simultaneously on every question; cross-domain tensions surfaced structurally</td>
-              <td>Human attention bandwidth has a physical ceiling. No committee can hold all domains in active working memory at once.</td>
-            </tr>
-            <tr>
-              <td><strong>Challenge intensity</strong></td>
-              <td>Depends on organizational culture; devil's advocate roles are often absent or performative</td>
-              <td>Adversarial debate, risk gate, and implementation friction gate are built into the process and cannot be bypassed</td>
-              <td>Institutional design vs. individual courage. The system cannot skip the challenge step.</td>
-            </tr>
-            <tr>
-              <td><strong>Reasoning traceability</strong></td>
-              <td>Judgment processes are scattered across meetings, emails, and individual memory</td>
-              <td>Complete debate transcripts, explicit confidence levels, documented dissent, traceable reasoning chains</td>
-              <td>System-level recording vs. human recall. Every conclusion can be traced to its evidentiary basis.</td>
-            </tr>
-            <tr>
-              <td><strong>Knowledge continuity</strong></td>
-              <td>Knowledge leaves with people; institutional memory decays with turnover</td>
-              <td>24/7 continuous operation; all analyses, debates, and revisions permanently retained</td>
-              <td>Personnel dependence vs. institutional accumulation. The system never forgets.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p style="margin-top: 1.5rem; font-weight: 700;">Not just faster than a traditional thinktank — structurally stronger on five dimensions.</p>
-    </div>
-  </section>
-
-  <!-- SECTION 6 -->
-  <section id="section6">
-    <div class="container">
-      <h2 class="section-title">6. Why the Advantage Compounds Over Time</h2>
-      <p class="lead">The most important property of Project Synergy is not what it delivers on day one. It is that the system becomes more valuable with every question it answers.</p>
-      
-      <div class="pillar">
-        <h3>National analytical memory.</h3>
-        <p>Every analysis the system produces — including the assumptions, the debates, the revisions, the errors, and the outcomes — is permanently retained. Over five years, this creates a depth of institutional understanding of Kazakhstan's policy environment that no external consultancy and no newly hired team could replicate. Traditional thinktanks lose knowledge when staff depart. Project Synergy accumulates it.</p>
-      </div>
-      <div class="pillar">
-        <h3>From project-based analysis to always-on national capability.</h3>
-        <p>Kazakhstan currently commissions analysis on a project basis — a question arises, a study is contracted, months pass, a report arrives. Project Synergy replaces this with a standing analytical capability that operates continuously, can be activated instantly for urgent questions, scales without additional hiring, and proactively surfaces emerging issues before they become crises.</p>
-      </div>
-      <div class="pillar">
-        <h3>A new generation of analysts.</h3>
-        <p>The 30–40 human analysts trained within Project Synergy learn a discipline that does not yet exist elsewhere: human-AI collaborative intelligence. These professionals become the analytical backbone not just of the thinktank but of Kazakhstan's entire governance system. The universities that partner with Project Synergy gain research capabilities — scenario simulation, policy retrospective analysis, sovereign data access — that no university in the world currently offers its scholars.</p>
-      </div>
-      <div class="pillar">
-        <h3>Sovereign capability, not vendor dependence.</h3>
-        <p>Project Synergy is structured for progressive knowledge transfer. In Phase 1, 01.AI deploys and operates the system. In Phase 2, Kazakh engineers take increasing responsibility. In Phase 3, Kazakhstan possesses full operational control — the models, the training pipelines, the architecture, and all intellectual property remain sovereign. 01.AI transitions to an advisory role. The long-term outcome is not a subscription to foreign technology. It is a national capability that Kazakhstan owns outright.</p>
-      </div>
-      <p style="font-weight:800; font-size:1.1rem; color:var(--accent);">The long-term advantage is not having better software. It is building a sovereign national capability that gets smarter with every decision.</p>
-    </div>
-  </section>
-
-  <!-- SECTION 7 -->
-  <section id="section7">
-    <div class="container">
-      <h2 class="section-title">7. Why This Requires No Leap of Faith</h2>
-      <p class="lead">Project Synergy is structured to eliminate financial risk to the State at every stage.</p>
-
-      <div class="phase-card phase-1">
-        <div class="phase-header">
-          <h3>Phase 1: The 100-Day Retrospective Test</h3>
-          <span class="badge">Zero State Financial Risk</span>
-        </div>
-        <p>The system is loaded with the data available to Kazakhstan's government during a documented historical crisis — the January 2022 events, the 2020 oil price shock, or the post-COVID supply chain disruptions. The multi-agent system runs its full analytical pipeline as if advising leadership in real time during that crisis.</p>
-        <p style="margin-top:1rem;">The output is compared, point by point, against the actual ministerial responses produced at the time. An independent audit commission — comprising representatives from the President's office, the Mazhilis, and Nazarbayev University — evaluates whether the system would have produced a demonstrably superior analysis.</p>
-        <p style="margin-top:1rem;"><strong>Freedom Holding Corp. underwrites the entire Phase 1 cost.</strong> The Republic of Kazakhstan makes no financial commitment whatsoever. If the system fails the audit, Freedom Holding absorbs the cost. The State assumes zero risk.</p>
-        <p style="margin-top:1rem; font-weight:700; border-left: 4px solid var(--accent); padding-left: 1rem;">Only if the audit commission certifies, in a formal written finding, that the system's analysis was of demonstrably higher quality than the historical response — only then does the Republic of Kazakhstan authorize Phase 2 investment.</p>
-      </div>
-
-      <p style="text-align:center; font-weight:800; margin-bottom: 3rem; font-size: 1.2rem;">Kazakhstan does not need to believe this will work. Kazakhstan only needs to agree to let the system prove it.</p>
-
-      <div class="phase-card">
-        <h3>Phase 2: Full Operational Deployment (Months 7–18)</h3>
-        <p>Expand to all domain agents. Integrate comprehensive government and private-sector data streams. Establish a regular production cadence of policy briefs. Launch the research platform for Kazakhstan's universities. Grow the analyst team to 20–25 researchers.</p>
-      </div>
-
-      <div class="phase-card">
-        <h3>Phase 3: Sovereign Handover (Months 19–36)</h3>
-        <p>Complete transfer of operational control, model weights, training pipelines, and system documentation to designated Kazakh institutions. 01.AI's operational access is contractually terminated. Kazakhstan operates, maintains, and extends the system independently.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- APPENDIX -->
-  <section class="appendix-section" id="appendices">
-    <div class="container">
-      <h2 class="section-title">Appendices (for technical and operational review)</h2>
-      <ul class="appendix-list">
-        <li><strong>A. Multi-Agent Technical Architecture:</strong> Three-tier agent design, dual-layer cognitive/swarm philosophy, SFT methodology</li>
-        <li><strong>B. RAISE Sovereign Shield and Diplomatic Airlock:</strong> Anti-espionage input defense, protocol formatting, classification enforcement</li>
-        <li><strong>C. Data Sources and Integration Architecture:</strong> Government data assets, Freedom Holding financial telemetry, secure API design</li>
-        <li><strong>D. Freedom Holding Corp.:</strong> Company profile, data contribution, Freedom Cloud infrastructure, philanthropic alignment</li>
-        <li><strong>E. Governance, Ethics, and Data Sovereignty:</strong> Human-in-the-loop constraints, data residency, bias monitoring, Advisory Board, Analytical Quality Dashboard</li>
-        <li><strong>F. Investment Framework:</strong> Phase-by-phase investment categories, "Always On" cost comparison</li>
-        <li><strong>G. Research Platform Capabilities:</strong> Scenario Simulation Engine, Research Copilot Mode, Policy Retrospective Engine, Publication Accelerator</li>
-        <li><strong>H. 01.AI Partner Profile:</strong> Technical credentials, AlemLLM, deployment methodology, knowledge transfer commitment</li>
+  <header>
+    <div class="container header-nav">
+      <a href="#" class="logo">Project Synergy</a>
+      <ul class="nav-links">
+        <li><a href="#section1">Context</a></li>
+        <li><a href="#section2">Breakthrough</a></li>
+        <li><a href="#section4">Leadership</a></li>
+        <li><a href="#section6">Nexus</a></li>
+        <li><a href="#section8">Phases</a></li>
       </ul>
     </div>
-  </section>
-</main>
+  </header>
 
-<footer>
-  <div class="container">
-    <p>© 2024 Project Synergy. All Rights Reserved.</p>
-    <p>Republic of Kazakhstan · 01.AI · Freedom Holding Corp.</p>
-  </div>
-</footer>
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container">
+        <p class="hero-label">Strategic Partnership</p>
+        <h1>Project Synergy</h1>
+        <h2>An AI-Enhanced, Youth-Driven National Thinktank for the Republic of Kazakhstan</h2>
+        <p>Republic of Kazakhstan · 01.AI · Freedom Holding Corp.</p>
+        <div class="hero-founders">
+          Founded by <strong>Mr. Maulen Ashimbayev</strong>
+          in collaboration with Kazakhstan's next generation of analytical leaders.
+        </div>
+      </div>
+    </section>
+
+    <!-- QUOTE -->
+    <div class="quote-block">
+      <div class="container">
+        <blockquote>
+          “A multi-agent thinktank is a breakthrough not because it automates analysis, but because it allows a nation to think with greater breadth, greater depth, greater challenge, and greater continuity than any traditional thinktank can achieve — while keeping human judgment firmly in control.”
+        </blockquote>
+      </div>
+    </div>
+
+    <!-- SECTION 1: WHY -->
+    <section id="section1">
+      <div class="container">
+        <span class="section-num">01</span>
+        <h2>Why Today's Thinktanks Are No Longer Enough</h2>
+        <div style="column-count: 2; column-gap: 3rem; column-rule: 1px solid #eee;">
+          <p>Central Asia stands at a historic crossroads — one of the world's youngest regions demographically, politically, and institutionally. The culture of independent policy research remains in its nascent stages, frequently described as an ecosystem resembling a night sky with few visible stars. Yet these points of light are multiplying. Kazakhstan has established itself as the scientific and intellectual hub of the region, securing first place among Central Asian nations in the SCImago Journal Rank for global scientific activity and placing 64th worldwide in 2024.</p>
+          <p>Kazakhstan is already home to formidable state-owned analytical centers. KazISS leads the top three thinktanks in the Caucasus, Central, and South Asia, alongside the Economic Research Institute and the Institute of World Economics and Politics. These institutions are national assets. Project Synergy does not seek to replace them. It seeks to make them — and the entire state analytical ecosystem — radically more powerful.</p>
+          <p>But even the strongest traditional thinktanks, whether domestic or international — Brookings, RAND, McKinsey Global Institute, Chatham House — share five structural limitations that no amount of funding can overcome:</p>
+        </div>
+
+        <div class="grid">
+          <div class="card">
+            <h3>Slow</h3>
+            <p>A single policy study takes 6 to 18 months. By the time recommendations arrive, the landscape has already shifted.</p>
+          </div>
+          <div class="card">
+            <h3>Fragmented</h3>
+            <p>An economist analyzes fiscal policy. An energy specialist analyzes decarbonization. But real policy decisions do not respect domain boundaries. No single team can hold economics, energy, society, manufacturing, technology, and geopolitics in mind simultaneously.</p>
+          </div>
+          <div class="card">
+            <h3>Static</h3>
+            <p>Reports are frozen at publication. When new data arrives — a commodity price shock, a diplomatic development — the analysis is already stale. There is no mechanism to update conclusions dynamically.</p>
+          </div>
+          <div class="card">
+            <h3>One-time</h3>
+            <p>A government that needs to evaluate dozens of interconnected policy options simply cannot commission enough studies at $1–3 million each to keep pace with modern statecraft.</p>
+          </div>
+          <div class="card" style="grid-column: 1 / -1;">
+            <h3>Cannot verify their own inputs</h3>
+            <p>Traditional thinktanks take the data they receive at face value. If regional statistics have been smoothed or inflated before reaching the analysts, every subsequent conclusion is built on a false foundation. No amount of sophisticated reasoning can compensate for corrupted inputs. Traditional thinktanks have no independent mechanism to detect this.</p>
+          </div>
+        </div>
+
+        <div style="margin-top: 3rem; border-top: 1px solid #eee; padding-top: 2rem;">
+          <p>Furthermore, established thinktanks are led primarily by older generations who rely heavily on conventional, linear policy analysis. Because this approach is fundamentally slow and expensive, legacy institutions are practically restricted to exploring only a single policy path at a time. The world's most complex governance challenges — from water-energy nexus management to constitutional transformation — demand a fundamentally different kind of analytical capability.</p>
+          <p><strong>Kazakhstan deserves better than analysis that is slow, siloed, stale, one-off, and blind to the quality of its own data.</strong></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: BREAKTHROUGH -->
+    <section id="section2">
+      <div class="container">
+        <span class="section-num">02</span>
+        <h2>What the Breakthrough Really Is</h2>
+        <p class="lead">Project Synergy is not a faster report-writing machine. It is a structurally different way to think about national policy — one that achieves what no traditional institution can, across three dimensions simultaneously.</p>
+        
+        <div class="grid">
+          <div class="card">
+            <h3>Breadth: All critical perspectives, at once</h3>
+            <p>Traditional thinktanks assemble experts one by one. Cross-domain analysis depends on coordination meetings, shared documents, and the willingness of specialists to engage outside their lanes. In practice, complex questions get fragmented across separate workstreams that rarely reconnect.</p>
+            <p>A multi-agent thinktank brings all critical lenses to the table by design. When a policy question enters the system, specialized analytical agents across economics, energy, geopolitics, social policy, industry, technology, and digital governance activate in parallel — each analyzing the question from its domain, drawing on its own data streams, and producing an independent assessment. The system does not add perspectives sequentially. It deploys them simultaneously.</p>
+            <p><em>Traditional thinktanks add experts one by one. A multi-agent thinktank brings all critical lenses to the table by design.</em></p>
+          </div>
+          <div class="card">
+            <h3>Depth: Conclusions that survived challenge</h3>
+            <p>Having multiple perspectives is necessary but not sufficient. In Project Synergy, adversarial challenge is not optional — it is architectural. After independent analysis, an <strong>Advocate</strong> builds the strongest possible case for the emerging recommendation. A <strong>Skeptic</strong> — structurally required to assume the worst — attacks every assumption, models catastrophic scenarios, and identifies the failure modes no one wants to discuss.</p>
+            <p>This automated "blue-team-red-team" methodology means that devil's advocate agents rigorously attack and critique the analysis generated by other agents. The iterative, adversarial debate process surfaces blind spots, exposes factual nuances, and dramatically improves the structural and logical quality of every recommendation.</p>
+            <p><strong>A better answer is not an answer produced faster. It is an answer that has survived structured challenge.</strong></p>
+          </div>
+          <div class="card">
+            <h3>Continuity: Intelligence that never goes stale</h3>
+            <p>Traditional thinktanks deliver reports. Once published, the analysis is frozen. Three months later, half the assumptions may no longer hold — but the document cannot tell anyone that.</p>
+            <p>Project Synergy delivers living intelligence. Every policy brief remains connected to its underlying data streams. When material changes occur — a commodity price shift, a diplomatic development, new demographic data — the system automatically flags which assumptions have changed and offers an updated analysis. Beyond reactive updates, the system continuously monitors data streams and proactively alerts analysts when significant anomalies appear — before anyone has thought to ask.</p>
+            <p><em>A traditional thinktank delivers reports. A multi-agent thinktank delivers a continuously operating national analytical capability.</em></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: CASE STUDY -->
+    <section id="section3">
+      <div class="container">
+        <span class="section-num">03</span>
+        <h2>How It Works: The Rare Earth Question</h2>
+        <p>To make this concrete, consider a question Kazakhstan's leadership might face: <em>"Should Kazakhstan invest $5 billion in rare earth mineral processing?"</em></p>
+
+        <div class="case-box">
+          <div class="verification-tag">
+            <strong>Before any analysis begins — data verification.</strong>
+            <p>The system cross-references official regional statistics against independent financial data: commercial electricity payments, payroll tax flows, consumer transaction volumes, banking activity. Result: the Karaganda region's official industrial employment figures are inflated by approximately 12%. The audited baseline shows 14,200 active industrial workers, not the reported 16,100. All subsequent analysis uses the corrected figure.</p>
+            <p style="font-size: 0.8rem; font-weight: 700; margin-top: 1rem;">This capability alone — a built-in verification layer for government data — is something no traditional thinktank possesses or can replicate.</p>
+          </div>
+
+          <h3 style="margin-bottom: 2rem;">Seven perspectives deploy simultaneously:</h3>
+          <div class="agent-stream">
+            <div class="agent-pill"><span class="agent-role">Economist</span><p>Concludes the investment could increase export value by 4.2x, with positive NPV within 8 years — but 14 years if prices decline 30%.</p></div>
+            <div class="agent-pill"><span class="agent-role">Energy Analyst</span><p>Identifies 1.2 TWh annual requirement vs 0.3 TWh surplus; requires gas or renewables (+$800M, +3 years).</p></div>
+            <div class="agent-pill"><span class="agent-role">Geopolitics Specialist</span><p>China controls 70% of global processing; entry read as competitive repositioning — but West may offer preferential trade terms.</p></div>
+            <div class="agent-pill"><span class="agent-role">Social Policy Analyst</span><p>Workforce migration accelerate northern depopulation; toxic waste paths need community consent (often +12–18 months).</p></div>
+            <div class="agent-pill"><span class="agent-role">Industrial Specialist</span><p>Lacks domestic separation chemistry expertise; tech transfer is a prerequisite — otherwise 2–3x historical cost overruns.</p></div>
+            <div class="agent-pill skeptic"><span class="agent-role">Skeptic</span><p>Stress-tests: if solid-state batteries reduce demand by 40% by 2032, market shrinks dramatically. What is the exit strategy?</p></div>
+            <div class="agent-pill"><span class="agent-role">Implementation Friction</span><p>Actual execution 48 months vs 30 model; winter construction windows; deficit of 2,400 engineers; rail capacity constraints at 60%.</p></div>
+          </div>
+
+          <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid #ddd;">
+            <h3>The synthesized recommendation</h3>
+            <p>Is not "invest $5 billion" or "don't invest." It is: proceed with a phased $2.2B initial investment focused on the three highest-value elements, contingent on securing a technology transfer partner and renewable energy co-investment. Defer the remaining $2.8B pending market validation. Adjust all timelines by 1.6x and budget by 1.3x to reflect implementation reality. Pre-consult Beijing before public announcement.</p>
+            <p><strong>A separate classified brief preserves the Skeptic's unfiltered worst-case analysis — including combined-catastrophe scenarios and their estimated probability — for the President, Prime Minister, and Security Council only.</strong></p>
+            <p><strong>Total elapsed time: 48 hours.</strong> (Traditional study of comparable scope: 12–18 months.)</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: HUMAN + AI -->
+    <section id="section4">
+      <div class="container">
+        <span class="section-num">04</span>
+        <h2>Why Human + AI Is Stronger Than AI Alone</h2>
+        <p>Project Synergy is not an autonomous system. It is a system designed to make human judgment radically more powerful. AI expands the space of analysis. Humans decide what matters.</p>
+
+        <div class="grid">
+          <div class="card">
+            <span class="agent-role">Irreplaceable Role</span>
+            <h3>Framer</h3>
+            <p>AI agents do not know which questions matter most to Kazakhstan at this moment. Humans set the questions. AI explores the answers.</p>
+          </div>
+          <div class="card">
+            <span class="agent-role">Irreplaceable Role</span>
+            <h3>Editor</h3>
+            <p>Every AI brief passes human review. Analysts evaluate conclusions against political reality, institutions, and public sentiment. Humans judge which options are actionable.</p>
+          </div>
+          <div class="card">
+            <span class="agent-role">Irreplaceable Role</span>
+            <h3>Owner</h3>
+            <p>National decisions demand human accountability. The responsibility for acting belongs to people, never to models. Governance ensures human leadership is always better informed.</p>
+          </div>
+        </div>
+
+        <div class="highlight-box">
+          <p>AI explores the space of possibilities. Humans decide what matters, what is feasible, and what they are willing to be accountable for. Every policy brief must be reviewed, annotated, and approved by at least two qualified human analysts before delivery. The system empowers human judgment. It does not substitute for it.</p>
+        </div>
+
+        <div class="leadership-grid">
+          <div>
+            <h3>The Founder's Role: Institutional Gravity</h3>
+            <p>Mr. Maulen Ashimbayev — former Speaker of the Senate and one of Kazakhstan's most distinguished statesmen — brings decades of diplomatic gravity and institutional memory. His transition from formal parliamentary duties to civil-society innovation is not a step away from influence but a step toward impact unconstrained by traditional bureaucratic structures.</p>
+            <p>Mr. Ashimbayev serves as the high-level bridge between the thinktank's AI-generated insights and the desks of top decision-makers. His statesmanship provides something no technology can: the trust necessary for leadership to act on the thinktank's recommendations.</p>
+          </div>
+          <div>
+            <h3>Youth as the Prime Resource</h3>
+            <p>The human element — specifically the structural inclusion of Kazakhstan's next generation — provides the innovative edge. Kazakhstan possesses a formidable pipeline of young analytical talent from the Presidential Youth Personnel Reserve and the School of Analytics (Taldau Mektebi).</p>
+            <p>Young researchers trained in AI can conduct rapid multi-path exploration — simultaneously testing many original research trajectories. The thinktank serves as a high-speed idea generator, producing stress-tested proposals that older, established state institutions can select from.</p>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top: 3rem; background: #fff;">
+          <h3>Intergenerational Leadership by Design</h3>
+          <p>The coexistence of senior statecraft experience and digital-native analytical fluency is the thinktank's core competitive advantage. To formalize this, Project Synergy embeds two governance structures:</p>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1rem;">
+            <div>
+              <p><strong>Shadow Board:</strong> A group of 9–13 younger analysts works concurrently with senior leadership. Every recommendation is pressure-tested against the realities of a digitally connected demographic before publication.</p>
+            </div>
+            <div>
+              <p><strong>Reverse Mentoring:</strong> Senior leaders are paired with early-career professionals who instruct them on emerging technologies, closing the digital skills gap at the highest levels.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: MEASURABLE -->
+    <section id="section5">
+      <div class="container">
+        <span class="section-num">05</span>
+        <h2>Measurable Differences</h2>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Dimension</th>
+                <th>Traditional Thinktank</th>
+                <th>Project Synergy</th>
+                <th>Gap Factor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Response cycle</strong></td>
+                <td>6–18 months per major study</td>
+                <td>48 hours to reviewed policy brief</td>
+                <td>Architecture difference. Parallel multi-agent analysis vs sequential work.</td>
+              </tr>
+              <tr>
+                <td><strong>Analytical breadth</strong></td>
+                <td>1–3 domains per study</td>
+                <td>7+ domains activated simultaneously</td>
+                <td>Human attention ceiling. No committee can hold all domains in active memory.</td>
+              </tr>
+              <tr>
+                <td><strong>Challenge intensity</strong></td>
+                <td>Culture-dependent; often performative</td>
+                <td>Adversarial debate & risk gates are structural</td>
+                <td>Institutional design vs. individual courage. System cannot skip challenges.</td>
+              </tr>
+              <tr>
+                <td><strong>Reasoning traceability</strong></td>
+                <td>Scattered across meetings/emails</td>
+                <td>Complete transcripts, confidence levels</td>
+                <td>System-level recording vs. human recall.</td>
+              </tr>
+              <tr>
+                <td><strong>Knowledge continuity</strong></td>
+                <td>Knowledge leaves with people</td>
+                <td>24/7 continuous operation; permanent memory</td>
+                <td>Personnel dependence vs. institutional accumulation.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: NEXUS -->
+    <section id="section6">
+      <div class="container">
+        <div class="nexus-box">
+          <span class="agent-role" style="color: var(--accent);">Day-One Strategic Focus</span>
+          <h2>The Water-Energy-Geopolitics Nexus</h2>
+          <p>To demonstrate value from day one, Project Synergy will focus on the most critical vulnerability facing Central Asia: <span class="accent-text">The Water-Energy-Geopolitics nexus.</span></p>
+          <p>Prime Minister Bektenov mandated the introduction of AI-based water resource management by May 2026. Project Synergy is positioned to serve as the indispensable analytical partner. AI is already transforming water management globally — 22% of AI applications focus on distribution optimization.</p>
+          <p>By combining satellite data, climate models, and watershed analysis with geopolitical risk models, the thinktank can advise on how water scarcity will impact agricultural output, internal migration, and transboundary diplomacy. <span class="accent-text">Only a system that can hold all of these dimensions at once — and force them to confront each other — can produce the integrated analysis this challenge demands.</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 7: COMPOUNDING -->
+    <section id="section7">
+      <div class="container">
+        <span class="section-num">07</span>
+        <h2>Why the Advantage Compounds Over Time</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>National analytical memory</h3>
+            <p>Every analysis — including assumptions, revisions, errors, and outcomes — is permanently retained. Over five years, this creates institutional understanding no consultancy could replicate. Project Synergy accumulates knowledge.</p>
+          </div>
+          <div class="card">
+            <h3>From project-based to always-on</h3>
+            <p>Replace episodic studies with a standing analytical capability that operates continuously, activates instantly, and proactively surfaces issues before they become crises.</p>
+          </div>
+          <div class="card">
+            <h3>A new generation of analysts</h3>
+            <p>Analysts master human-AI collaborative intelligence, becoming the analytical backbone of Kazakhstan's governance. Partner universities gain research capabilities no university in the world currently offers.</p>
+          </div>
+          <div class="card">
+            <h3>Elevating the entire ecosystem</h3>
+            <p>Project Synergy supercharges established analytical centers (KazISS, IWEP). It absorbs computational risks to test experimental AI models, feeding verified innovations into the state ecosystem.</p>
+          </div>
+          <div class="card">
+            <h3>Sovereign capability</h3>
+            <p>Structured for progressive knowledge transfer. Kazakhstan possesses full operational control — models, training pipelines, and IP remain sovereign. It is a national capability Kazakhstan owns outright.</p>
+          </div>
+          <div class="card">
+            <h3>Commercial sustainability</h3>
+            <p>Hybrid revenue model: public civic materials are free, while specialized risk scoring and regulatory tracking are offered to foreign embassies and investors through Data-as-a-Service. This ensures the thinktank attracts elite talent independently.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 8: PHASES -->
+    <section id="section8">
+      <div class="container">
+        <span class="section-num">08</span>
+        <h2>Why This Requires No Leap of Faith</h2>
+        <p>Project Synergy is structured to eliminate financial risk to the State at every stage.</p>
+
+        <div class="phase-card active" style="margin-bottom: 2rem;">
+          <span class="phase-label">Phase 1: The 100-Day Retrospective Test</span>
+          <h3>Zero State Financial Risk</h3>
+          <p>The system is loaded with data from a documented historical crisis (e.g. January 2022, 2020 oil shock). The multi-agent system runs its pipeline as if advising in real time. Output is compared point by point against actual ministerial responses. </p>
+          <p><strong>Freedom Holding Corp. underwrites the entire Phase 1 cost.</strong> If the system fails the audit, Freedom Holding absorbs the cost. The State assumes zero risk. Only if the audit commission certifies superior analysis does the Republic authorize Phase 2.</p>
+          <p style="font-weight: 800; font-style: italic;">“Kazakhstan does not need to believe this will work. Kazakhstan only needs to agree to let the system prove it.”</p>
+        </div>
+
+        <div class="phase-grid">
+          <div class="phase-card">
+            <span class="phase-label">Phase 2: Deployment</span>
+            <h3>Months 7–18</h3>
+            <p>Expand to all domain agents; integrate comprehensive data; launch the university research platform; grow the analyst team (Reserve alumni and Analytics graduates). Deploy capabilities on the Water-Energy-Geopolitics Nexus.</p>
+          </div>
+          <div class="phase-card">
+            <span class="phase-label">Phase 3: Handover</span>
+            <h3>Months 19–36</h3>
+            <p>Complete transfer of operational control, model weights, and documentation. 01.AI access is terminated. Kazakhstan operates and extends the system independently. Launch commercial offerings to international clients.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 9: AUTONOMY -->
+    <section id="section9">
+      <div class="container">
+        <span class="section-num">09</span>
+        <h2>Institutional Autonomy: Protecting the Analytical Core</h2>
+        <div style="column-count: 2; column-gap: 3rem;">
+          <p>Mr. Ashimbayev's background is a profound asset — providing access and legitimacy. To maximize this while assuring independent academics and foreign partners, Project Synergy embeds several structural safeguards:</p>
+          <p><strong>Radical financial transparency:</strong> All funding sources are proactively disclosed. An impenetrable ethical firewall separates funding from the research agenda.</p>
+          <p><strong>Diversified funding:</strong> The institution avoids single-source dependence, pursuing multi-year institutional support rather than project-specific contracts.</p>
+          <p><strong>Pluralistic voices:</strong> The institution elevates the voices of young researchers and allows staff to maintain affiliations with international universities and independent oversight bodies.</p>
+          <p><strong>AI explainability as trust infrastructure:</strong> Every predictive model is fully auditable. The mathematical logic behind any risk score or legislative projection can be independently verified. Human experts maintain absolute authority.</p>
+          <p><strong>Freedom Holding's quasi-state positioning:</strong> Provides sovereign compute infrastructure ($2 billion Sovereign AI Hub powered by NVIDIA) and real-time data access — while a zero-knowledge cryptographic architecture ensures the infrastructure provider cannot access policy queries. <em>Freedom Holding powers the engine. It does not steer the analysis.</em></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- APPENDIX -->
+    <div class="appendix">
+      <div class="container">
+        <h2>Appendices</h2>
+        <ul class="appendix-list">
+          <li><strong>A.</strong> Multi-Agent Technical Architecture: SFT methodology, adversarial debate protocols</li>
+          <li><strong>B.</strong> RAISE Sovereign Shield: Anti-espionage, classification enforcement</li>
+          <li><strong>C.</strong> Data Sources: Satellite/Earth Observation data, secure API design</li>
+          <li><strong>D.</strong> Freedom Holding Corp.: Sovereign AI Hub, philanthropic alignment</li>
+          <li><strong>E.</strong> Governance & Ethics: Bias monitoring, Advisory Board</li>
+          <li><strong>F.</strong> Investment Framework: Data-as-a-Service revenue model</li>
+          <li><strong>G.</strong> Research Platform: Scenario Simulation, Publication Accelerator</li>
+          <li><strong>H.</strong> 01.AI Partner Profile: AlemLLM, knowledge transfer commitment</li>
+          <li><strong>I.</strong> Youth Pipeline: Shadow Board charter, Reverse Mentoring protocols</li>
+          <li><strong>J.</strong> Water-Energy-Geopolitics Nexus: Detailed analytical framework</li>
+          <li><strong>K.</strong> Algorithmic Risk Modeling: Middle Corridor logistics intelligence</li>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>Republic of Kazakhstan · 01.AI · Freedom Holding Corp.</p>
+      <p style="margin-top: 1rem;">© 2024 Project Synergy. A Sovereign National Capability.</p>
+    </div>
+  </footer>
 
 </body>
 </html>
